@@ -1,7 +1,11 @@
 import java.util.Random;
 
 public class Main {
-
+    private static String generateNumber(int count){
+        String result = new String();
+        for(int i = 0; i < count; i++) result+= String.valueOf(new Random().nextInt(10));
+        return result;
+    }
 
     public static void main(String[] args) {
         String[] base_mail = {"@mail.ru", "@gmail.com", "@yandex.ru", "@elixirsd.com"};
@@ -18,20 +22,15 @@ public class Main {
         email+= base_mail[new Random().nextInt(base_mail.length)];
 
         // phone
-        String phone = "+7 (";
-        while (phone.length() < 18) {
-            switch (phone.length()){
-                case 7:
-                    phone+=")";
-                case 12:
-                    phone+="-";
-                    break;
-                case 15:
-                    phone+="-";
-            }
-            phone+=String.valueOf(new Random().nextInt(10));
-        }
+        String phone = String.format(
+                "+7 (%s)-%s-%s-%s",
+                generateNumber(3),
+                generateNumber(3),
+                generateNumber(2),
+                generateNumber(2)
+                );
 
-        //
+        System.out.println(email);
+        System.out.println(phone);
     }
 }
